@@ -1,10 +1,7 @@
-
-
 import 'package:flutter/material.dart';
-import 'home_page.dart';
-import 'settings_page.dart';
-import 'profile_page.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'home.dart';
+import 'settings.dart';
+import 'profile.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,7 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    SettingsPage(),
+    settings(),
     ProfilePage(),
   ];
 
@@ -70,5 +67,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-//código main.dart
