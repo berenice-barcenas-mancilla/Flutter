@@ -134,27 +134,7 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-        body: Column(
-        children: [
-          // Carousel with 5 images
-          Container(
-            height: 200, // Adjust height as needed
-            child: ListView(
-              scrollDirection: Axis.vertical,
-              children: <Widget>[
-                Image.network('https://via.placeholder.com/200'),
-                Image.network('https://via.placeholder.com/200'),
-                Image.network('https://via.placeholder.com/200'),
-                Image.network('https://via.placeholder.com/200'),
-                Image.network('https://via.placeholder.com/200'),
-              ],
-            ),
-          ),
-          Expanded(
-            child: _widgetOptions.elementAt(_selectedIndex),
-          ),
-        ],
-      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
