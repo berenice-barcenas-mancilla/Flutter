@@ -170,7 +170,15 @@ class HomeContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Home Page Content'),
+      child: ListView(
+        children: <Widget>[
+          Image.asset('assets/images/1.png'),
+          Image.asset('assets/images/2.png'),
+          Image.asset('assets/images/3.png'),
+          Image.asset('assets/images/4.png'),
+          Image.asset('assets/images/5.png'),
+        ],
+      ),
     );
   }
 }
