@@ -1,7 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'profile.dart';
 import 'specialprice.dart';
 import 'shoppingcard.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Lottus Home',
+      theme: ThemeData(
+        primarySwatch: Colors.pink,
+      ),
+      home: Home(),
+    );
+  }
+}
 
 class Home extends StatefulWidget {
   @override
@@ -92,25 +110,28 @@ class _HomeState extends State<Home> {
                 // Acción de filtro para mascaras
               },
             ),
-           ListTile(
+            ListTile(
               leading: Icon(Icons.color_lens),
               title: Text('Uñas'),
               onTap: () {
                 // Acción de filtro para mascaras
               },
-            ),ListTile(
+            ),
+            ListTile(
               leading: Icon(Icons.brush_rounded),
               title: Text('Brochas'),
               onTap: () {
                 // Acción de filtro para mascaras
               },
-            ),ListTile(
+            ),
+            ListTile(
               leading: Icon(Icons.battery_full),
               title: Text('Aplicadores'),
               onTap: () {
                 // Acción de filtro para mascaras
               },
-            ),ListTile(
+            ),
+            ListTile(
               leading: Icon(Icons.face_2),
               title: Text('Skincare'),
               onTap: () {
@@ -167,17 +188,29 @@ class _HomeState extends State<Home> {
 }
 
 class HomeContent extends StatelessWidget {
+  final List<String> imgList = [
+    'assets/images/1.png',
+    'assets/images/2.png',
+    'assets/images/3.png',
+    'assets/images/4.png',
+    'assets/images/5.png',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: ListView(
-        children: <Widget>[
-          Image.asset('assets/images/1.png'),
-          Image.asset('assets/images/2.png'),
-          Image.asset('assets/images/3.png'),
-          Image.asset('assets/images/4.png'),
-          Image.asset('assets/images/5.png'),
-        ],
+      child: CarouselSlider(
+        options: CarouselOptions(
+          height: 400.0,
+          autoPlay: true,
+          enlargeCenterPage: true,
+          scrollDirection: Axis.vertical,
+        ),
+        items: imgList.map((item) => Container(
+          child: Center(
+            child: Image.asset(item, fit: BoxFit.cover, height: 400),
+          ),
+        )).toList(),
       ),
     );
   }
