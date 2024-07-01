@@ -9,12 +9,16 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final Color primaryColor = Color.fromRGBO(143, 148, 251, 1);
+  final Color secondaryColor = Color.fromRGBO(143, 148, 251, .6);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Lottus Home',
       theme: ThemeData(
-        primarySwatch: Colors.pink,
+        primarySwatch: Colors.purple, // Colors.purple as a fallback
+        primaryColor: primaryColor,
+        // accentColor: secondaryColor,
       ),
       home: Home(),
     );
@@ -44,10 +48,12 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final Color primaryColor = Color.fromRGBO(143, 148, 251, 1);
+    final Color secondaryColor = Color.fromRGBO(143, 148, 251, .6);
     return Scaffold(
       appBar: AppBar(
         title: Text('Lottus Home'),
-        backgroundColor: Colors.pink,
+        backgroundColor: primaryColor,
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
@@ -65,8 +71,7 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.pink,
-              ),
+                color: primaryColor,              ),
               child: Text(
                 'Filters',
                 style: TextStyle(
@@ -160,27 +165,27 @@ class _HomeState extends State<Home> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home, color: Colors.black),
-            activeIcon: Icon(Icons.home, color: Colors.pink),
+            activeIcon: Icon(Icons.home, color: primaryColor),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart, color: Colors.black),
-            activeIcon: Icon(Icons.shopping_cart, color: Colors.pink),
+            activeIcon: Icon(Icons.shopping_cart, color: primaryColor),
             label: 'Shopping Card',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.attach_money, color: Colors.black),
-            activeIcon: Icon(Icons.attach_money, color: Colors.pink),
+            activeIcon: Icon(Icons.attach_money, color: primaryColor),
             label: 'Special Price',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person, color: Colors.black),
-            activeIcon: Icon(Icons.person, color: Colors.pink),
+            activeIcon: Icon(Icons.person, color: primaryColor),
             label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.pink,
+        selectedItemColor: primaryColor,
         onTap: _onItemTapped,
       ),
     );
@@ -206,11 +211,13 @@ class HomeContent extends StatelessWidget {
           enlargeCenterPage: true,
           scrollDirection: Axis.vertical,
         ),
-        items: imgList.map((item) => Container(
-          child: Center(
-            child: Image.asset(item, fit: BoxFit.cover, height: 400),
-          ),
-        )).toList(),
+        items: imgList
+            .map((item) => Container(
+                  child: Center(
+                    child: Image.asset(item, fit: BoxFit.cover, height: 400),
+                  ),
+                ))
+            .toList(),
       ),
     );
   }
