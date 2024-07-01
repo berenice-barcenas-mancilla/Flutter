@@ -1,5 +1,3 @@
-//Database.dart
-
 import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -17,26 +15,15 @@ class DatabaseHelper {
     _database = await _initDatabase();
     return _database!;
   }
-  Future<Database> _initDatabase() async {
-    String path = join(await getDatabasesPath(), 'lottus.db');
-    return await openDatabase(
-      path,
-      version: 1
-    );
-  }
 
-/* Por si me equivoco
-   Future<Database> _initDatabase() async {
+  Future<Database> _initDatabase() async {
     String path = join(await getDatabasesPath(), 'lottus.db');
     return await openDatabase(
       path,
       version: 1,
       onCreate: _onCreate,
-      onUpgrade: (Database db, int oldVersion, int newVersion) async{
-        await db.execute('ALTER TABLE clientes ADD COLUMN password TEXT')
-      }
     );
-  } */
+  }
 
   Future _onCreate(Database db, int version) async {
     await db.execute('''
@@ -96,7 +83,6 @@ class DatabaseHelper {
     ''');
   }
 
-
   Future<void> insertTestData() async {
     var db = await database;
     await db.insert('clientes', {
@@ -108,14 +94,25 @@ class DatabaseHelper {
     });
   }
 
-  Future<bool> authenticateUser(String nombre, String password) async{
+  Future<bool> authenticateUser(String nombre, String password) async {
     var db = await database;
     var result = await db.query(
       'clientes',
       where: 'nombre = ? AND password = ?',
-      whereArgs: [nombre,password],
+      whereArgs: [nombre, password],
     );
-    result result.isNotEmpty;
+    return result.isNotEmpty;
+  }
+
+  Future<void> registerUser(String nombre, String password, String correoElectronico, String direccion, String telefono) async {
+    var db = await database;
+    await db.insert('clientes', {
+      'nombre': nombre,
+      'password': password,
+      'correo_electronico': correoElectronico,
+      'direccion': direccion,
+      'telefono': telefono,
+    });
   }
 
   Future<void> testDatabase() async {
@@ -126,7 +123,7 @@ class DatabaseHelper {
     await insertTestData();
 
     // Leer datos de prueba
-    var result = await db.query('users');
+    var result = await db.query('clientes');
     if (kDebugMode) {
       print('Datos de prueba insertados: $result');
     }

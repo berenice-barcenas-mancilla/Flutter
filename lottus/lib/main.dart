@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'home.dart';
-
+import 'package:lottus/servicios/database.dart';
 void main() {
   runApp(MyApp());
 }
@@ -299,6 +299,12 @@ class ShoppingCard extends StatelessWidget {
 }
 
 class Register extends StatelessWidget {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -428,6 +434,7 @@ class Register extends StatelessWidget {
                                             Color.fromRGBO(143, 148, 251, 1))),
                               ),
                               child: TextField(
+                                controller: _usernameController,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: 'Nombre de usuario',
@@ -438,6 +445,7 @@ class Register extends StatelessWidget {
                             Container(
                               padding: EdgeInsets.all(8.0),
                               child: TextField(
+                                controller: _passwordController,
                                 obscureText: true,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
@@ -445,7 +453,58 @@ class Register extends StatelessWidget {
                                   hintStyle: TextStyle(color: Colors.grey[700]),
                                 ),
                               ),
-                            )
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(
+                                        color:
+                                            Color.fromRGBO(143, 148, 251, 1))),
+                              ),
+                              child: TextField(
+                                controller: _emailController,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Correo Electrónico',
+                                  hintStyle: TextStyle(color: Colors.grey[700]),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(
+                                        color:
+                                            Color.fromRGBO(143, 148, 251, 1))),
+                              ),
+                              child: TextField(
+                                controller: _addressController,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Dirección',
+                                  hintStyle: TextStyle(color: Colors.grey[700]),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(
+                                        color:
+                                            Color.fromRGBO(143, 148, 251, 1))),
+                              ),
+                              child: TextField(
+                                controller: _phoneController,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Teléfono',
+                                  hintStyle: TextStyle(color: Colors.grey[700]),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -453,23 +512,56 @@ class Register extends StatelessWidget {
                     SizedBox(height: 30),
                     FadeInUp(
                       duration: Duration(milliseconds: 1900),
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          gradient: LinearGradient(
-                            colors: [
-                              Color.fromRGBO(143, 148, 251, 1),
-                              Color.fromRGBO(143, 148, 251, .6),
-                            ],
+                      child: GestureDetector(
+                        onTap: () async {
+                          String username = _usernameController.text;
+                          String password = _passwordController.text;
+                          String email = _emailController.text;
+                          String address = _addressController.text;
+                          String phone = _phoneController.text;
+
+                          if (username.isNotEmpty &&
+                              password.isNotEmpty &&
+                              email.isNotEmpty &&
+                              address.isNotEmpty &&
+                              phone.isNotEmpty) {
+                            await DatabaseHelper().registerUser(
+                              username,
+                              password,
+                              email,
+                              address,
+                              phone,
+                            );
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => MyApp()),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Por favor, llene todos los campos.'),
+                              ),
+                            );
+                          }
+                        },
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: LinearGradient(
+                              colors: [
+                                Color.fromRGBO(143, 148, 251, 1),
+                                Color.fromRGBO(143, 148, 251, .6),
+                              ],
+                            ),
                           ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Registrar",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                          child: Center(
+                            child: Text(
+                              "Registrar",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ),
                       ),
