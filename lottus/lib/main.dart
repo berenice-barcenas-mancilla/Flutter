@@ -249,18 +249,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
-// // Example other pages (Home, Profile, SpecialPrice, ShoppingCard)
-// class Home extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Home'),
-//       ),
-//       body: Center(child: Text('Home Page')),
-//     );
-//   }
-// }
+
 
 class Profile extends StatelessWidget {
   @override
@@ -471,40 +460,6 @@ class Register extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Container(
-                              padding: EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                                        color:
-                                            Color.fromRGBO(143, 148, 251, 1))),
-                              ),
-                              child: TextField(
-                                controller: _addressController,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'Dirección',
-                                  hintStyle: TextStyle(color: Colors.grey[700]),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                                        color:
-                                            Color.fromRGBO(143, 148, 251, 1))),
-                              ),
-                              child: TextField(
-                                controller: _phoneController,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'Teléfono',
-                                  hintStyle: TextStyle(color: Colors.grey[700]),
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                       ),
@@ -517,20 +472,14 @@ class Register extends StatelessWidget {
                           String username = _usernameController.text;
                           String password = _passwordController.text;
                           String email = _emailController.text;
-                          String address = _addressController.text;
-                          String phone = _phoneController.text;
-
+                       
                           if (username.isNotEmpty &&
                               password.isNotEmpty &&
-                              email.isNotEmpty &&
-                              address.isNotEmpty &&
-                              phone.isNotEmpty) {
+                              email.isNotEmpty) {
                             await DatabaseHelper().registerUser(
                               username,
                               password,
-                              email,
-                              address,
-                              phone,
+                              email
                             );
                             Navigator.pushReplacement(
                               context,

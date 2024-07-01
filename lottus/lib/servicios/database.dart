@@ -44,8 +44,6 @@ class DatabaseHelper {
           nombre TEXT,
           password TEXT,
           correo_electronico TEXT,
-          direccion TEXT,
-          telefono TEXT
       )
     ''');
     await db.execute('''
@@ -89,8 +87,7 @@ class DatabaseHelper {
       'nombre': 'Maria',
       'password': 'password',
       'correo_electronico': 'correo@gmail.com',
-      'direccion': 'Paso de los Toros 1480',
-      'telefono': '4427794571',
+     
     });
   }
 
@@ -104,14 +101,12 @@ class DatabaseHelper {
     return result.isNotEmpty;
   }
 
-  Future<void> registerUser(String nombre, String password, String correoElectronico, String direccion, String telefono) async {
+  Future<void> registerUser(String nombre, String password, String correoElectronico) async {
     var db = await database;
     await db.insert('clientes', {
       'nombre': nombre,
       'password': password,
       'correo_electronico': correoElectronico,
-      'direccion': direccion,
-      'telefono': telefono,
     });
   }
 
