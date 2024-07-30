@@ -4,8 +4,6 @@ import 'profile.dart';
 import 'specialprice.dart';
 import 'shoppingcard.dart';
 
-
-
 void main() {
   runApp(MyApp());
 }
@@ -13,7 +11,6 @@ void main() {
 class MyApp extends StatelessWidget {
   final Color primaryColor = Color.fromRGBO(143, 148, 251, 1);
   final Color secondaryColor = Color.fromRGBO(143, 148, 251, .6);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

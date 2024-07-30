@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
-import 'home.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
         '/profile': (context) => Profile(),
         '/specialprice': (context) => SpecialPrice(),
         '/shoppingcard': (context) => ShoppingCard(),
-        '/register': (context) => Register(), // Define la ruta de registro
+        '/register': (context) => Register(), // Asegúrate de tener este archivo creado
       },
     );
   }
@@ -127,8 +126,7 @@ class HomePage extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                              color: Color.fromRGBO(143, 148, 251, 1)),
+                          border: Border.all(color: Color.fromRGBO(143, 148, 251, 1)),
                           boxShadow: [
                             BoxShadow(
                               color: Color.fromRGBO(143, 148, 251, .2),
@@ -142,10 +140,7 @@ class HomePage extends StatelessWidget {
                             Container(
                               padding: EdgeInsets.all(8.0),
                               decoration: BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                                        color:
-                                            Color.fromRGBO(143, 148, 251, 1))),
+                                border: Border(bottom: BorderSide(color: Color.fromRGBO(143, 148, 251, 1))),
                               ),
                               child: Row(
                                 children: [
@@ -154,8 +149,7 @@ class HomePage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         border: InputBorder.none,
                                         hintText: "Nombre de usuario",
-                                        hintStyle:
-                                            TextStyle(color: Colors.grey[700]),
+                                        hintStyle: TextStyle(color: Colors.grey[700]),
                                       ),
                                     ),
                                   ),
@@ -172,8 +166,7 @@ class HomePage extends StatelessWidget {
                                       decoration: InputDecoration(
                                         border: InputBorder.none,
                                         hintText: "Contraseña",
-                                        hintStyle:
-                                            TextStyle(color: Colors.grey[700]),
+                                        hintStyle: TextStyle(color: Colors.grey[700]),
                                       ),
                                     ),
                                   ),
@@ -221,8 +214,7 @@ class HomePage extends StatelessWidget {
                         children: [
                           Text(
                             "¿Olvidaste tu contraseña?",
-                            style: TextStyle(
-                                color: Color.fromRGBO(143, 148, 251, 1)),
+                            style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),
                           ),
                           SizedBox(height: 20),
                           GestureDetector(
@@ -231,8 +223,7 @@ class HomePage extends StatelessWidget {
                             },
                             child: Text(
                               "¿Aún no tienes una cuenta? Regístrate aquí",
-                              style: TextStyle(
-                                  color: Color.fromRGBO(143, 148, 251, 1)),
+                              style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),
                             ),
                           ),
                         ],
@@ -248,7 +239,6 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
 
 
 class Profile extends StatelessWidget {
@@ -538,6 +528,7 @@ class Register extends StatelessWidget {
           ),
         ),
       ),
+      body: Center(child: Text('Register Page')),
     );
   }
 }
