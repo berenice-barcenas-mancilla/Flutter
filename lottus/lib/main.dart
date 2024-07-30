@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'home.dart';
-import 'package:lottus/servicios/database.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -288,12 +288,6 @@ class ShoppingCard extends StatelessWidget {
 }
 
 class Register extends StatelessWidget {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -423,7 +417,6 @@ class Register extends StatelessWidget {
                                             Color.fromRGBO(143, 148, 251, 1))),
                               ),
                               child: TextField(
-                                controller: _usernameController,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: 'Nombre de usuario',
@@ -434,7 +427,6 @@ class Register extends StatelessWidget {
                             Container(
                               padding: EdgeInsets.all(8.0),
                               child: TextField(
-                                controller: _passwordController,
                                 obscureText: true,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
@@ -472,14 +464,20 @@ class Register extends StatelessWidget {
                           String username = _usernameController.text;
                           String password = _passwordController.text;
                           String email = _emailController.text;
-                       
+                          String address = _addressController.text;
+                          String phone = _phoneController.text;
+
                           if (username.isNotEmpty &&
                               password.isNotEmpty &&
-                              email.isNotEmpty) {
+                              email.isNotEmpty &&
+                              address.isNotEmpty &&
+                              phone.isNotEmpty) {
                             await DatabaseHelper().registerUser(
                               username,
                               password,
-                              email
+                              email,
+                              address,
+                              phone,
                             );
                             Navigator.pushReplacement(
                               context,
