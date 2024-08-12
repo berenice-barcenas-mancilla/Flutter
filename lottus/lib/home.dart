@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
     HomeContent(),
     shoppingcard(),
     specialprice(),
-    profile(),
+    Profile(),
   ];
 
   void _onItemTapped(int index) {

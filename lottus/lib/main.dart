@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:lottus/register.dart';
 import 'controllers/data_helper.dart';
 import 'models/user_model.dart';
+import 'package:lottus/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         '/profile': (context) => Profile(),
         '/specialprice': (context) => SpecialPrice(),
         '/shoppingcard': (context) => ShoppingCard(),
-        '/register': (context) => Register(), // Asegúrate de tener este archivo creado
+        '/register': (context) => Register(),
       },
     );
   }
@@ -39,15 +41,16 @@ class SignInDemo extends StatefulWidget {
 }
 
 class _SignInDemoState extends State<SignInDemo> {
-  final GoogleSignIn _googleSingIn = GoogleSignIn();
+
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
   final DataHelper _dataHelper = DataHelper();
 
   UserModel? _user;
 
-  //Metodo para iniciar sesion con google
+  // Método para iniciar sesión con Google
   Future<void> _signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await _googleSingIn.signIn();
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser != null) {
         _user = UserModel(
           id: googleUser.id,
@@ -63,7 +66,7 @@ class _SignInDemoState extends State<SignInDemo> {
     }
   }
 
-  //Metodo para iniciar sesion con Facebook
+  // Método para iniciar sesión con Facebook
   Future<void> _signInWithFacebook() async {
     final LoginResult result = await FacebookAuth.instance.login();
     if (result.status == LoginStatus.success) {
@@ -78,7 +81,12 @@ class _SignInDemoState extends State<SignInDemo> {
       setState(() {});
     }
   }
-
+// Método para iniciar sesión con correo y contraseña
+  Future<void> _signInWithEmail() async {
+    // Implementar la lógica para inicio de sesión con correo y contraseña aquí
+    // Si el inicio de sesión es exitoso, navegar a la pantalla de inicio
+    Navigator.pushReplacementNamed(context, '/home');
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -282,6 +290,37 @@ class _SignInDemoState extends State<SignInDemo> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 30),
+                    FadeInUp(
+                      duration: Duration(milliseconds: 2000),
+                      child: ElevatedButton(
+                        onPressed: _signInWithEmail, // Llamar al método de inicio de sesión
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromRGBO(143, 148, 251, 1),
+                        ),
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: LinearGradient(
+                              colors: [
+                                Color.fromRGBO(143, 148, 251, 1),
+                                Color.fromRGBO(143, 148, 251, .6),
+                              ],
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Iniciar sesión",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     SizedBox(height: 70),
                     FadeInUp(
                       duration: Duration(milliseconds: 2000),
@@ -333,17 +372,6 @@ class _SignInDemoState extends State<SignInDemo> {
   }
 }
 
-class Home extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-      ),
-      body: Center(child: Text('Home Page')),
-    );
-  }
-}
 
 class Profile extends StatelessWidget {
   @override
@@ -377,18 +405,6 @@ class ShoppingCard extends StatelessWidget {
         title: Text('Shopping Card'),
       ),
       body: Center(child: Text('Shopping Card Page')),
-    );
-  }
-}
-
-class Register extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Register'),
-      ),
-      body: Center(child: Text('Register Page')),
     );
   }
 }
